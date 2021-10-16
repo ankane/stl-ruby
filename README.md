@@ -34,7 +34,7 @@ series = User.group_by_day(:created_at).count
 Stl.decompose(series, period: 7)
 ```
 
-Series can also be an array without times (the index is returned)
+Series can also be an array without times
 
 ```ruby
 series = [100, 150, 136, ...]
