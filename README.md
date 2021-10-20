@@ -81,8 +81,7 @@ gem 'vega'
 And use:
 
 ```ruby
-result = Stl.decompose(series, period: 7)
-Stl.plot(series, result)
+Stl.plot(series, decompose_result)
 ```
 
 ## Credits
