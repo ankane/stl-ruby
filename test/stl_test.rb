@@ -39,6 +39,18 @@ class StlTest < Minitest::Test
     assert_equal "seasonal_degree must be 0 or 1", error.message
   end
 
+  def test_plot_hash
+    today = Date.today
+    series = self.series.map.with_index.to_h { |v, i| [today + i, v] }
+    result = Stl.decompose(series, period: 7)
+    assert_kind_of Vega::LiteChart, Stl.plot(series, result)
+  end
+
+  def test_plot_array
+    result = Stl.decompose(series, period: 7)
+    assert_kind_of Vega::LiteChart, Stl.plot(series, result)
+  end
+
   def series
     [
       5.0, 9.0, 2.0, 9.0, 0.0, 6.0, 3.0, 8.0, 5.0, 8.0,

@@ -70,6 +70,21 @@ Stl.decompose(
 )
 ```
 
+## Plotting [unreleased]
+
+Add [Vega](https://github.com/ankane/vega) to your application’s Gemfile:
+
+```ruby
+gem 'vega'
+```
+
+And use:
+
+```ruby
+result = Stl.decompose(series, period: 7)
+Stl.plot(series, result)
+```
+
 ## Credits
 
 This library was ported from the [Fortran implementation](https://www.netlib.org/a/stl).
