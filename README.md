@@ -84,7 +84,7 @@ And use:
 Stl.plot(series, decompose_result)
 ```
 
-## Strength (unreleased)
+## Strength
 
 Get the seasonal strength
 

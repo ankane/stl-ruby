@@ -1,4 +1,4 @@
-## 0.1.2 (unreleased)
+## 0.1.2 (2021-10-24)
 
 - Added `seasonal_strength` and `trend_strength` methods
 - Improved plot width and height
