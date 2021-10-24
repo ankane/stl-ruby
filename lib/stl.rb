@@ -91,6 +91,8 @@ module Stl
       Vega.lite
         .data(data)
         .vconcat(charts)
+        .config(autosize: {type: "fit-x", contains: "padding"})
+        .height(560) # TODO figure out better approach
     end
 
     private
