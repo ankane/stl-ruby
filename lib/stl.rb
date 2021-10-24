@@ -92,6 +92,7 @@ module Stl
         .data(data)
         .vconcat(charts)
         .config(autosize: {type: "fit-x", contains: "padding"})
+        .width(nil) # prevents warning
         .height(560) # TODO figure out better approach
     end
 
