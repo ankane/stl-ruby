@@ -93,7 +93,7 @@ module Stl
         .vconcat(charts)
         .config(autosize: {type: "fit-x", contains: "padding"})
         .width(nil) # prevents warning
-        .height(nil) # prevents warning and sets div to auto
+        .height(nil) # prevents warning and sets div height to auto
     end
 
     private
