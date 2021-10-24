@@ -96,6 +96,16 @@ module Stl
         .height(nil) # prevents warning and sets div height to auto
     end
 
+    def seasonal_strength(result)
+      sr = result[:seasonal].zip(result[:remainder]).map { |a, b| a + b }
+      [0, 1 - var(result[:remainder]) / var(sr)].max
+    end
+
+    def trend_strength(result)
+      tr = result[:trend].zip(result[:remainder]).map { |a, b| a + b }
+      [0, 1 - var(result[:remainder]) / var(tr)].max
+    end
+
     private
 
     def iso8601(v)
@@ -104,6 +114,11 @@ module Stl
       else
         v.strftime("%Y-%m-%dT%H:%M:%S.%L%z")
       end
+    end
+
+    def var(series)
+      mean = series.sum / series.size.to_f
+      series.sum { |v| (v - mean) ** 2 } / (series.size.to_f - 1)
     end
   end
 end

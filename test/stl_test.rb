@@ -51,6 +51,28 @@ class StlTest < Minitest::Test
     assert_kind_of Vega::LiteChart, Stl.plot(series, result)
   end
 
+  def test_seasonal_strength
+    result = Stl.decompose(series, period: 7)
+    assert_in_delta 0.284111676315015, Stl.seasonal_strength(result)
+  end
+
+  def test_seasonal_strength_max
+    series = 30.times.map { |i| i % 7 }
+    result = Stl.decompose(series, period: 7)
+    assert_in_delta 1, Stl.seasonal_strength(result)
+  end
+
+  def test_trend_strength
+    result = Stl.decompose(series, period: 7)
+    assert_in_delta 0.16384245231864702, Stl.trend_strength(result)
+  end
+
+  def test_trend_strength_max
+    series = 30.times.to_a
+    result = Stl.decompose(series, period: 7)
+    assert_in_delta 1, Stl.trend_strength(result)
+  end
+
   def series
     [
       5.0, 9.0, 2.0, 9.0, 0.0, 6.0, 3.0, 8.0, 5.0, 8.0,
