@@ -1,9 +1,7 @@
-// stl
-#include "stl.hpp"
-
-// rice
 #include <rice/rice.hpp>
 #include <rice/stl.hpp>
+
+#include "stl.hpp"
 
 Rice::Array to_a(std::vector<float>& x) {
   auto a = Rice::Array();

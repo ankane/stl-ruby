@@ -1,3 +1,7 @@
+## 0.1.3 (unreleased)
+
+- Fixed installation error on macOS 12
+
 ## 0.1.2 (2021-10-24)
 
 - Added `seasonal_strength` and `trend_strength` methods
