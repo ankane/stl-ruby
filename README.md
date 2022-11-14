@@ -9,7 +9,7 @@ Seasonal-trend decomposition for Ruby
 Add this line to your application’s Gemfile:
 
 ```ruby
-gem 'stl-rb'
+gem "stl-rb"
 ```
 
 ## Getting Started
