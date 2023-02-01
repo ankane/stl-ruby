@@ -1,8 +1,8 @@
 # ext
-require "stl/ext"
+require_relative "stl/ext"
 
 # modules
-require "stl/version"
+require_relative "stl/version"
 
 module Stl
   class << self

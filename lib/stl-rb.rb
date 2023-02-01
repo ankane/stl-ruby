@@ -1,1 +1,1 @@
-require "stl"
+require_relative "stl"
