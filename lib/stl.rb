@@ -13,6 +13,11 @@ module Stl
       seasonal_jump: nil, trend_jump: nil, low_pass_jump: nil,
       inner_loops: nil, outer_loops: nil, robust: false
     )
+      # TODO raise ArgumentError in 0.2.0
+      if period < 2
+        warn "[stl] period must be greater than 1"
+      end
+
       params = StlParams.new
 
       params.seasonal_length(seasonal_length) unless seasonal_length.nil?

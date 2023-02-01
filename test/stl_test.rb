@@ -25,6 +25,12 @@ class StlTest < Minitest::Test
     assert_elements_in_delta [0.99374926, 0.8129377, 0.9385952, 0.9458036, 0.29742217], result[:weights].first(5)
   end
 
+  def test_period_one
+    assert_output nil, /period must be greater than 1/ do
+      Stl.decompose(series, period: 1)
+    end
+  end
+
   def test_too_few_periods
     error = assert_raises(ArgumentError) do
       Stl.decompose(series, period: 16)
