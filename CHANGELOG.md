@@ -1,6 +1,7 @@
 ## 0.2.0 (unreleased)
 
 - Raise error when `period` is less than 2
+- Dropped support for Ruby < 2.7
 
 ## 0.1.3 (2021-12-16)
 
