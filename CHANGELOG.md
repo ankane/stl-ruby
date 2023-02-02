@@ -1,4 +1,4 @@
-## 0.2.0 (unreleased)
+## 0.2.0 (2023-02-01)
 
 - Raise error when `period` is less than 2
 - Dropped support for Ruby < 2.7
