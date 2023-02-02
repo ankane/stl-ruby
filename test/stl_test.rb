@@ -26,9 +26,10 @@ class StlTest < Minitest::Test
   end
 
   def test_period_one
-    assert_output nil, /period must be greater than 1/ do
+    error = assert_raises(ArgumentError) do
       Stl.decompose(series, period: 1)
     end
+    assert_equal "period must be greater than 1", error.message
   end
 
   def test_too_few_periods
