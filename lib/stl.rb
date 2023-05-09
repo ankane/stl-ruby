@@ -1,5 +1,5 @@
 # ext
-require_relative "stl/ext"
+require "stl/ext"
 
 # modules
 require_relative "stl/version"

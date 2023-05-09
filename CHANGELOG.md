@@ -1,3 +1,7 @@
+## 0.2.1 (unreleased)
+
+- Fixed error on Fedora
+
 ## 0.2.0 (2023-02-01)
 
 - Raise error when `period` is less than 2
