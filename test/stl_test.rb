@@ -25,6 +25,13 @@ class StlTest < Minitest::Test
     assert_elements_in_delta [0.99374926, 0.8129377, 0.9385952, 0.9458036, 0.29742217], result[:weights].first(5)
   end
 
+  def test_repeating
+    series = 24.times.to_a.shuffle * 8
+    result = Stl.decompose(series, period: 24)
+    assert_elements_in_delta [0] * series.size, result[:remainder]
+    assert_elements_in_delta [11.5] * series.size, result[:trend]
+  end
+
   def test_period_one
     error = assert_raises(ArgumentError) do
       Stl.decompose(series, period: 1)
