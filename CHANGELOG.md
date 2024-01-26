@@ -1,4 +1,4 @@
-## 0.2.3 (unreleased)
+## 0.2.3 (2024-01-26)
 
 - Fixed bug with `inner_loops` and `outer_loops`
 
