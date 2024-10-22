@@ -1,3 +1,7 @@
+## 0.3.0 (unreleased)
+
+- Dropped support for Ruby < 3.1
+
 ## 0.2.3 (2024-01-26)
 
 - Fixed bug with `inner_loops` and `outer_loops`
