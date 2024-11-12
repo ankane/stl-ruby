@@ -18,9 +18,9 @@ Decompose a time series
 
 ```ruby
 series = {
-  Date.parse("2023-01-01") => 100,
-  Date.parse("2023-01-02") => 150,
-  Date.parse("2023-01-03") => 136,
+  Date.parse("2025-01-01") => 100,
+  Date.parse("2025-01-02") => 150,
+  Date.parse("2025-01-03") => 136,
   # ...
 }
 
