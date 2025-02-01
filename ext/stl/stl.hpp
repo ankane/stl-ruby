@@ -1,5 +1,5 @@
 /*!
- * STL C++ v0.1.4
+ * STL C++ v0.1.6
  * https://github.com/ankane/stl-cpp
  * Unlicense OR MIT License
  *
@@ -20,6 +20,8 @@
 #include <vector>
 
 namespace stl {
+
+namespace {
 
 bool est(const float* y, size_t n, size_t len, int ideg, float xs, float* ys, size_t nleft, size_t nright, float* w, bool userw, const float* rw) {
     auto range = ((float) n) - 1.0;
@@ -351,22 +353,35 @@ float strength(const std::vector<float>& component, const std::vector<float>& re
     return std::max(0.0, 1.0 - var(remainder) / var(sr));
 }
 
+}
+
+/// A STL result.
 class StlResult {
 public:
+    /// Returns the seasonal component.
     std::vector<float> seasonal;
+
+    /// Returns the trend component.
     std::vector<float> trend;
+
+    /// Returns the remainder.
     std::vector<float> remainder;
+
+    /// Returns the weights.
     std::vector<float> weights;
 
-    inline float seasonal_strength() {
+    /// Returns the seasonal strength.
+    inline float seasonal_strength() const {
         return strength(seasonal, remainder);
     }
 
-    inline float trend_strength() {
+    /// Returns the trend strength.
+    inline float trend_strength() const {
         return strength(trend, remainder);
     }
 };
 
+/// A set of STL parameters.
 class StlParams {
     std::optional<size_t> ns_ = std::nullopt;
     std::optional<size_t> nt_ = std::nullopt;
@@ -382,75 +397,91 @@ class StlParams {
     bool robust_ = false;
 
 public:
+    /// Sets the length of the seasonal smoother.
     inline StlParams seasonal_length(size_t ns) {
         this->ns_ = ns;
         return *this;
     }
 
+    /// Sets the length of the trend smoother.
     inline StlParams trend_length(size_t nt) {
         this->nt_ = nt;
         return *this;
     }
 
+    /// Sets the length of the low-pass filter.
     inline StlParams low_pass_length(size_t nl) {
         this->nl_ = nl;
         return *this;
     }
 
+    /// Sets the degree of locally-fitted polynomial in seasonal smoothing.
     inline StlParams seasonal_degree(int isdeg) {
         this->isdeg_ = isdeg;
         return *this;
     }
 
+    /// Sets the degree of locally-fitted polynomial in trend smoothing.
     inline StlParams trend_degree(int itdeg) {
         this->itdeg_ = itdeg;
         return *this;
     }
 
+    /// Sets the degree of locally-fitted polynomial in low-pass smoothing.
     inline StlParams low_pass_degree(int ildeg) {
         this->ildeg_ = ildeg;
         return *this;
     }
 
+    /// Sets the skipping value for seasonal smoothing.
     inline StlParams seasonal_jump(size_t nsjump) {
         this->nsjump_ = nsjump;
         return *this;
     }
 
+    /// Sets the skipping value for trend smoothing.
     inline StlParams trend_jump(size_t ntjump) {
         this->ntjump_ = ntjump;
         return *this;
     }
 
+    /// Sets the skipping value for low-pass smoothing.
     inline StlParams low_pass_jump(size_t nljump) {
         this->nljump_ = nljump;
         return *this;
     }
 
+    /// Sets the number of loops for updating the seasonal and trend components.
     inline StlParams inner_loops(size_t ni) {
         this->ni_ = ni;
         return *this;
     }
 
+    /// Sets the number of iterations of robust fitting.
     inline StlParams outer_loops(size_t no) {
         this->no_ = no;
         return *this;
     }
 
+    /// Sets whether robustness iterations are to be used.
     inline StlParams robust(bool robust) {
         this->robust_ = robust;
         return *this;
     }
 
-    StlResult fit(const float* y, size_t n, size_t np);
-    StlResult fit(const std::vector<float>& y, size_t np);
+    /// Decomposes a time series.
+    StlResult fit(const float* y, size_t n, size_t np) const;
+
+    /// Decomposes a time series.
+    StlResult fit(const std::vector<float>& y, size_t np) const;
 };
 
+/// Creates a new set of parameters.
 StlParams params() {
     return StlParams();
 }
 
-StlResult StlParams::fit(const float* y, size_t n, size_t np) {
+StlResult StlParams::fit(const float* y, size_t n, size_t np) const {
     if (n < 2 * np) {
         throw std::invalid_argument("series has less than two periods");
     }
@@ -503,7 +534,7 @@ StlResult StlParams::fit(const float* y, size_t n, size_t np) {
     return res;
 }
 
-StlResult StlParams::fit(const std::vector<float>& y, size_t np) {
+StlResult StlParams::fit(const std::vector<float>& y, size_t np) const {
     return StlParams::fit(y.data(), y.size(), np);
 }
 
