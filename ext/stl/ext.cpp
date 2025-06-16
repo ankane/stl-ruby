@@ -1,3 +1,5 @@
+#include <vector>
+
 #include <rice/rice.hpp>
 #include <rice/stl.hpp>
 
