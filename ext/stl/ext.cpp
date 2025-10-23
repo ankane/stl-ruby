@@ -8,7 +8,7 @@
 Rice::Array to_a(std::vector<float>& x) {
   auto a = Rice::Array();
   for (auto v : x) {
-    a.push(v);
+    a.push(v, false);
   }
   return a;
 }
