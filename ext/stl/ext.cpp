@@ -6,7 +6,7 @@
 #include "stl.hpp"
 
 Rice::Array to_a(std::vector<float>& x) {
-  auto a = Rice::Array();
+  Rice::Array a;
   for (auto v : x) {
     a.push(v, false);
   }
@@ -34,9 +34,9 @@ void Init_ext() {
     .define_method(
       "fit",
       [](stl::StlParams& self, std::vector<float> series, size_t period, bool weights) {
-        auto result = self.fit(series, period);
+        stl::StlResult result = self.fit(series, period);
 
-        auto ret = Rice::Hash();
+        Rice::Hash ret;
         ret[Rice::Symbol("seasonal")] = to_a(result.seasonal);
         ret[Rice::Symbol("trend")] = to_a(result.trend);
         ret[Rice::Symbol("remainder")] = to_a(result.remainder);
