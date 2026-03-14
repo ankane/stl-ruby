@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <vector>
 
 #include <rice/rice.hpp>
@@ -33,7 +34,7 @@ void Init_ext() {
     .define_method("robust", &stl::StlParams::robust)
     .define_method(
       "fit",
-      [](stl::StlParams& self, std::vector<float> series, size_t period, bool weights) {
+      [](stl::StlParams& self, const std::vector<float>& series, size_t period, bool weights) {
         stl::StlResult result = self.fit(series, period);
 
         Rice::Hash ret;
