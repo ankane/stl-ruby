@@ -6,7 +6,7 @@
 
 #include "stl.hpp"
 
-Rice::Array to_a(std::vector<float>& x) {
+Rice::Array to_a(const std::vector<float>& x) {
   Rice::Array a;
   for (auto v : x) {
     a.push(v, false);
