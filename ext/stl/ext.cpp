@@ -7,7 +7,7 @@
 
 Rice::Array to_a(const std::vector<float>& x) {
   Rice::Array a;
-  for (auto v : x) {
+  for (const auto v : x) {
     a.push(v, false);
   }
   return a;
@@ -15,7 +15,7 @@ Rice::Array to_a(const std::vector<float>& x) {
 
 extern "C"
 void Init_ext() {
-  auto rb_mStl = Rice::define_module("Stl");
+  Rice::Module rb_mStl = Rice::define_module("Stl");
 
   Rice::define_class_under<stl::StlParams>(rb_mStl, "StlParams")
     .define_constructor(Rice::Constructor<stl::StlParams>())
