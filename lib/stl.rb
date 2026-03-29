@@ -19,21 +19,21 @@ module Stl
 
       params = StlParams.new
 
-      params.seasonal_length(seasonal_length) unless seasonal_length.nil?
-      params.trend_length(trend_length) unless trend_length.nil?
-      params.low_pass_length(low_pass_length) unless low_pass_length.nil?
+      params.seasonal_length = seasonal_length unless seasonal_length.nil?
+      params.trend_length = trend_length unless trend_length.nil?
+      params.low_pass_length = low_pass_length unless low_pass_length.nil?
 
-      params.seasonal_degree(seasonal_degree) unless seasonal_degree.nil?
-      params.trend_degree(trend_degree) unless trend_degree.nil?
-      params.low_pass_degree(low_pass_degree) unless low_pass_degree.nil?
+      params.seasonal_degree = seasonal_degree unless seasonal_degree.nil?
+      params.trend_degree = trend_degree unless trend_degree.nil?
+      params.low_pass_degree = low_pass_degree unless low_pass_degree.nil?
 
-      params.seasonal_jump(seasonal_jump) unless seasonal_jump.nil?
-      params.trend_jump(trend_jump) unless trend_jump.nil?
-      params.low_pass_jump(low_pass_jump) unless low_pass_jump.nil?
+      params.seasonal_jump = seasonal_jump unless seasonal_jump.nil?
+      params.trend_jump = trend_jump unless trend_jump.nil?
+      params.low_pass_jump = low_pass_jump unless low_pass_jump.nil?
 
-      params.inner_loops(inner_loops) unless inner_loops.nil?
-      params.outer_loops(outer_loops) unless outer_loops.nil?
-      params.robust(robust) unless robust.nil?
+      params.inner_loops = inner_loops unless inner_loops.nil?
+      params.outer_loops = outer_loops unless outer_loops.nil?
+      params.robust = robust unless robust.nil?
 
       if series.is_a?(Hash)
         sorted = series.sort_by { |k, _| k }
@@ -42,7 +42,7 @@ module Stl
         y = series
       end
 
-      params.fit(y, period, outer_loops.nil? ? robust : outer_loops > 0)
+      _decompose(y, period, params, outer_loops.nil? ? robust : outer_loops > 0)
     end
 
     def plot(series, result)
