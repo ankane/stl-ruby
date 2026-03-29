@@ -2,7 +2,6 @@
 #include <vector>
 
 #include <rice/rice.hpp>
-#include <rice/stl.hpp>
 
 #include "stl.hpp"
 
@@ -36,7 +35,8 @@ void Init_ext() {
   rb_mStl
     .define_singleton_function(
       "_decompose",
-      [](const std::vector<float>& series, size_t period, const stl::StlParams& params, bool weights) {
+      [](Rice::Array rb_series, size_t period, const stl::StlParams& params, bool weights) {
+        std::vector<float> series = rb_series.to_vector<float>();
         stl::Stl fit{series, period, params};
 
         Rice::Hash ret;
