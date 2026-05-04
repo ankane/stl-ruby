@@ -1,3 +1,7 @@
+## 0.4.1 (unreleased)
+
+- Fixed error with certain options
+
 ## 0.4.0 (2026-04-07)
 
 - Updated STL C++ to 0.3.0
