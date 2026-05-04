@@ -1,4 +1,4 @@
-## 0.4.1 (unreleased)
+## 0.4.1 (2026-05-04)
 
 - Fixed error with certain options
 
