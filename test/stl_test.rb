@@ -17,6 +17,13 @@ class StlTest < Minitest::Test
     assert_elements_in_delta [-0.17336464, 3.3337379, -1.6829021, 1.8841844, -4.7011037], result[:remainder].first(5)
   end
 
+  def test_seasonal_length
+    result = Stl.decompose(series, period: 7, seasonal_length: 7)
+    assert_elements_in_delta [0.36926576, 0.75655484, -1.3324139, 1.9553658, -0.6044802], result[:seasonal].first(5)
+    assert_elements_in_delta [4.804099, 4.9097075, 5.015316, 5.16045, 5.305584], result[:trend].first(5)
+    assert_elements_in_delta [-0.17336464, 3.3337379, -1.6829021, 1.8841844, -4.7011037], result[:remainder].first(5)
+  end
+
   def test_robust
     result = Stl.decompose(series, period: 7, robust: true)
     assert_elements_in_delta [0.14922355, 0.47939026, -1.833231, 1.7411387, 0.8200711], result[:seasonal].first(5)
