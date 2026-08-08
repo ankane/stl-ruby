@@ -13,7 +13,9 @@ module Stl
       seasonal_jump: nil, trend_jump: nil, low_pass_jump: nil,
       inner_loops: nil, outer_loops: nil, robust: false, lambda: nil
     )
-      if !period.is_a?(Array) && period < 2
+      mstl = period.is_a?(Array)
+
+      if !mstl && period < 2
         raise ArgumentError, "period must be greater than 1"
       end
 
@@ -42,7 +44,7 @@ module Stl
         y = series
       end
 
-      if period.is_a?(Array)
+      if mstl
         mstl_params = MstlParams.new
         mstl_params.lambda = lambda unless lambda.nil?
         mstl_params.stl_params = params
