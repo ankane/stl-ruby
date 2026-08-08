@@ -75,6 +75,7 @@ Stl.decompose(
   inner_loops: 2,         # number of loops for updating the seasonal and trend components
   outer_loops: 0,         # number of iterations of robust fitting
   robust: false,          # if robustness iterations are to be used
+  iterations: 2,          # number of iterations for MSTL
   lambda: 0.5             # lambda for Box-Cox transformation for MSTL
 )
 ```

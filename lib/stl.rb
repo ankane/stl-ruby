@@ -11,7 +11,8 @@ module Stl
       seasonal_length: nil, trend_length: nil, low_pass_length: nil,
       seasonal_degree: nil, trend_degree: nil, low_pass_degree: nil,
       seasonal_jump: nil, trend_jump: nil, low_pass_jump: nil,
-      inner_loops: nil, outer_loops: nil, robust: false, lambda: nil
+      inner_loops: nil, outer_loops: nil, robust: false,
+      iterations: nil, lambda: nil
     )
       mstl = period.is_a?(Array)
 
@@ -46,10 +47,12 @@ module Stl
 
       if mstl
         mstl_params = MstlParams.new
+        mstl_params.iterations = iterations unless iterations.nil?
         mstl_params.lambda = lambda unless lambda.nil?
         mstl_params.stl_params = params
         _decompose_mstl(y, period, mstl_params)
       else
+        raise ArgumentError, "iterations requires MSTL" unless iterations.nil?
         raise ArgumentError, "lambda requires MSTL" unless lambda.nil?
         _decompose(y, period, params, outer_loops.nil? ? robust : outer_loops > 0)
       end
