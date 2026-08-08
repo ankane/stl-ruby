@@ -101,13 +101,11 @@ module Stl
     end
 
     def seasonal_strength(result)
-      sr = result[:seasonal].zip(result[:remainder]).map { |a, b| a + b }
-      [0, 1 - var(result[:remainder]) / var(sr)].max
+      strength(result[:seasonal], result[:remainder])
     end
 
     def trend_strength(result)
-      tr = result[:trend].zip(result[:remainder]).map { |a, b| a + b }
-      [0, 1 - var(result[:remainder]) / var(tr)].max
+      strength(result[:trend], result[:remainder])
     end
 
     private
@@ -118,6 +116,11 @@ module Stl
       else
         v.strftime("%Y-%m-%dT%H:%M:%S.%L%z")
       end
+    end
+
+    def strength(component, remainder)
+      sr = component.zip(remainder).map { |a, b| a + b }
+      [0, 1 - var(remainder) / var(sr)].max
     end
 
     def var(series)
