@@ -1,4 +1,4 @@
-## 0.4.2 (unreleased)
+## 0.4.2 (2026-08-08)
 
 - Added support for MSTL
 
