@@ -93,4 +93,11 @@ class StlTest < Minitest::Test
     result = Stl.decompose(series, period: 7)
     assert_in_delta 1, Stl.trend_strength(result)
   end
+
+  def test_lambda
+    error = assert_raises(ArgumentError) do
+      Stl.decompose(series, period: 7, lambda: 0.5)
+    end
+    assert_equal "lambda requires MSTL", error.message
+  end
 end

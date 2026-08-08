@@ -48,6 +48,7 @@ module Stl
         mstl_params.stl_params = params
         _decompose_mstl(y, period, mstl_params)
       else
+        raise ArgumentError, "lambda requires MSTL" unless lambda.nil?
         _decompose(y, period, params, outer_loops.nil? ? robust : outer_loops > 0)
       end
     end
