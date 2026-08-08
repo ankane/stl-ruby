@@ -74,7 +74,8 @@ Stl.decompose(
   low_pass_jump: 1,       # skipping value for low-pass smoothing
   inner_loops: 2,         # number of loops for updating the seasonal and trend components
   outer_loops: 0,         # number of iterations of robust fitting
-  robust: false           # if robustness iterations are to be used
+  robust: false,          # if robustness iterations are to be used
+  lambda: 0.5             # lambda for Box-Cox transformation for MSTL
 )
 ```
 
