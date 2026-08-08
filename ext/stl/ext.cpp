@@ -33,6 +33,13 @@ void Init_ext() {
     .define_attr("outer_loops", &stl::StlParams::outer_loops)
     .define_attr("robust", &stl::StlParams::robust);
 
+  Rice::define_class_under<stl::MstlParams>(rb_mStl, "MstlParams")
+    .define_constructor(Rice::Constructor<stl::MstlParams>())
+    .define_attr("iterations", &stl::MstlParams::iterations)
+    .define_attr("lambda", &stl::MstlParams::lambda)
+    .define_attr("seasonal_lengths", &stl::MstlParams::seasonal_lengths)
+    .define_attr("stl_params", &stl::MstlParams::stl_params);
+
   rb_mStl
     .define_singleton_function(
       "_decompose",
@@ -47,6 +54,23 @@ void Init_ext() {
         if (weights) {
           ret[Rice::Symbol("weights")] = to_a(fit.weights());
         }
+        return ret;
+      })
+    .define_singleton_function(
+      "_decompose_mstl",
+      [](Rice::Array rb_series, const std::vector<size_t>& periods, const stl::MstlParams& params) {
+        std::vector<float> series = rb_series.to_vector<float>();
+        stl::Mstl fit{series, periods, params};
+
+        Rice::Array seasonal;
+        for (const auto& s : fit.seasonal()) {
+          seasonal.push(to_a(s), false);
+        }
+
+        Rice::Hash ret;
+        ret[Rice::Symbol("seasonal")] = seasonal;
+        ret[Rice::Symbol("trend")] = to_a(fit.trend());
+        ret[Rice::Symbol("remainder")] = to_a(fit.remainder());
         return ret;
       });
 }

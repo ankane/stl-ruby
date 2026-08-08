@@ -1,3 +1,7 @@
+## 0.4.2 (unreleased)
+
+- Added support for MSTL
+
 ## 0.4.1 (2026-05-04)
 
 - Fixed error with certain options

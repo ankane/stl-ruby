@@ -93,12 +93,4 @@ class StlTest < Minitest::Test
     result = Stl.decompose(series, period: 7)
     assert_in_delta 1, Stl.trend_strength(result)
   end
-
-  def series
-    [
-      5.0, 9.0, 2.0, 9.0, 0.0, 6.0, 3.0, 8.0, 5.0, 8.0,
-      7.0, 8.0, 8.0, 0.0, 2.0, 5.0, 0.0, 5.0, 6.0, 7.0,
-      3.0, 6.0, 1.0, 4.0, 4.0, 4.0, 3.0, 7.0, 5.0, 8.0
-    ]
-  end
 end

@@ -11,9 +11,9 @@ module Stl
       seasonal_length: nil, trend_length: nil, low_pass_length: nil,
       seasonal_degree: nil, trend_degree: nil, low_pass_degree: nil,
       seasonal_jump: nil, trend_jump: nil, low_pass_jump: nil,
-      inner_loops: nil, outer_loops: nil, robust: false
+      inner_loops: nil, outer_loops: nil, robust: false, lambda: nil
     )
-      if period < 2
+      if !period.is_a?(Array) && period < 2
         raise ArgumentError, "period must be greater than 1"
       end
 
@@ -42,11 +42,22 @@ module Stl
         y = series
       end
 
-      _decompose(y, period, params, outer_loops.nil? ? robust : outer_loops > 0)
+      if period.is_a?(Array)
+        mstl_params = MstlParams.new
+        mstl_params.lambda = lambda unless lambda.nil?
+        mstl_params.stl_params = params
+        _decompose_mstl(y, period, mstl_params)
+      else
+        _decompose(y, period, params, outer_loops.nil? ? robust : outer_loops > 0)
+      end
     end
 
     def plot(series, result)
       require "vega"
+
+      if mstl?(result)
+        raise "not implemented yet"
+      end
 
       data =
         if series.is_a?(Hash)
@@ -101,7 +112,13 @@ module Stl
     end
 
     def seasonal_strength(result)
-      strength(result[:seasonal], result[:remainder])
+      if mstl?(result)
+        result[:seasonal].map do |s|
+          strength(s, result[:remainder])
+        end
+      else
+        strength(result[:seasonal], result[:remainder])
+      end
     end
 
     def trend_strength(result)
@@ -126,6 +143,10 @@ module Stl
     def var(series)
       mean = series.sum / series.size.to_f
       series.sum { |v| (v - mean) ** 2 } / (series.size.to_f - 1)
+    end
+
+    def mstl?(result)
+      result[:seasonal][0].is_a?(Array)
     end
   end
 end
