@@ -97,7 +97,7 @@ class MstlTest < Minitest::Test
 
   def test_seasonal_strength_max
     series = 30.times.map { |i| i % 7 }
-    result = Stl.decompose(series, period: [7], seasonal_length: 7)
+    result = Stl.decompose(series, period: [7], seasonal_length: [7])
     assert_in_delta 1, Stl.seasonal_strength(result)[0]
   end
 

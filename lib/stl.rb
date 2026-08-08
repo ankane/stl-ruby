@@ -22,7 +22,7 @@ module Stl
 
       params = StlParams.new
 
-      params.seasonal_length = seasonal_length unless seasonal_length.nil?
+      params.seasonal_length = seasonal_length if !seasonal_length.nil? && !(mstl && seasonal_length.is_a?(Array))
       params.trend_length = trend_length unless trend_length.nil?
       params.low_pass_length = low_pass_length unless low_pass_length.nil?
 
@@ -49,6 +49,7 @@ module Stl
         mstl_params = MstlParams.new
         mstl_params.iterations = iterations unless iterations.nil?
         mstl_params.lambda = lambda unless lambda.nil?
+        mstl_params.seasonal_lengths = seasonal_length if seasonal_length.is_a?(Array)
         mstl_params.stl_params = params
         _decompose_mstl(y, period, mstl_params)
       else
