@@ -1,3 +1,5 @@
+
+
 # STL Ruby
 
 Seasonal-trend decomposition for Ruby
@@ -26,6 +28,7 @@ series = {
 
 Stl.decompose(series, period: 7)
 ```
+Returns a hash with `:seasonal`, `:trend`, and `:remainder` keys.
 
 Works great with [Groupdate](https://github.com/ankane/groupdate)
 
